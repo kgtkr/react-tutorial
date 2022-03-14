@@ -1,14 +1,16 @@
 import * as React from "react";
 import styles from "./Square.module.scss";
 
+export type SquareValue = "X" | "O" | null;
+
 export type Props = {
-  value: number;
+  value: SquareValue;
+  onClick?: () => void;
 };
 
-function Square({}: Props) {
-  const [value, setValue] = React.useState<string | null>(null);
+function Square({ value, onClick }: Props) {
   return (
-    <button className={styles.square} onClick={() => setValue("X")}>
+    <button className={styles.square} onClick={onClick}>
       {value}
     </button>
   );
