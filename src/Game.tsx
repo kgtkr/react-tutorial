@@ -16,9 +16,16 @@ function Game({}: Props) {
     },
   ]);
   const [xIsNext, setXIsNext] = React.useState<boolean>(true);
+  const [stepNumber, setStepNumber] = React.useState<number>(0);
+
+  const jumpTo = (step: number) => {
+    setStepNumber(step);
+    setXIsNext(step % 2 === 0);
+  };
 
   const handleClick = (i: number) => {
-    const current = history[history.length - 1];
+    const newHistory = history.slice(0, stepNumber + 1);
+    const current = newHistory[newHistory.length - 1];
     const squares = current.squares;
 
     if (calculateWinner(squares) !== null || squares[i] !== null) {
@@ -26,12 +33,23 @@ function Game({}: Props) {
     }
     const newSquares = [...squares];
     newSquares[i] = xIsNext ? "X" : "O";
-    setHistory([...history, { squares: newSquares }]);
+    setHistory([...newHistory, { squares: newSquares }]);
     setXIsNext(!xIsNext);
+    setStepNumber(newHistory.length);
   };
 
-  const current = history[history.length - 1];
+  const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
+
+  const moves = history.map((step, move) => {
+    const desc = move !== 0 ? "Go to move #" + move : "Go to game start";
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{desc}</button>
+      </li>
+    );
+  });
+
   const status =
     winner !== null
       ? `Winner: ${winner}`
@@ -44,7 +62,7 @@ function Game({}: Props) {
       </div>
       <div className={styles.gameInfo}>
         <div>{status}</div>
-        <ol>{/* TODO */}</ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   );
