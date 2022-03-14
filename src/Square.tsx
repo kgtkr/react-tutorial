@@ -5,8 +5,13 @@ export type Props = {
   value: number;
 };
 
-function Square({ value }: Props) {
-  return <button className={styles.square}>{value}</button>;
+function Square({}: Props) {
+  const [value, setValue] = React.useState<string | null>(null);
+  return (
+    <button className={styles.square} onClick={() => setValue("X")}>
+      {value}
+    </button>
+  );
 }
 
 export default Square;
