@@ -1,0 +1,30 @@
+{
+  "name": "react-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production node ./build.js",
+    "dev": "run-p typecheck:watch dev-server build:watch",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch --preserveWatchOutput",
+    "dev-server": "lite-server --baseDir=public",
+    "build:watch": "NODE_ENV=development node ./build.js watch"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "esbuild": "^0.14.25",
+    "esbuild-sass-plugin": "^2.2.4",
+    "lite-server": "^2.6.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.8",
+    "postcss-modules": "^4.3.1",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
