@@ -8,12 +8,15 @@ function Board({}: Props) {
   const [squares, setSquares] = React.useState<SquareValue[]>(
     Array<SquareValue>(9).fill(null)
   );
+  const [xIsNext, setXIsNext] = React.useState<boolean>(true);
 
   const handleClick = (i: number) => () => {
     const newSquares = [...squares];
-    newSquares[i] = "X";
+    newSquares[i] = xIsNext ? "X" : "O";
     setSquares(newSquares);
+    setXIsNext(!xIsNext);
   };
+
   const status = "Next player: X";
 
   return (
